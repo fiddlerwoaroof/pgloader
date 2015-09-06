@@ -54,6 +54,7 @@
                 </li>
                 <li><a href="../download.html">Download</a></li>
                 <li><a href="../sponsors.html">Sponsors</a></li>
+                <li><a href="../pgloader-moral-license.html">License</a></li>
               </ul>
             </div>
           </div>
@@ -160,7 +161,7 @@ LOAD ARCHIVE
              fields terminated by ','  
  
    FINALLY DO  
-     $$ create index blocks_ip4r_idx on geolite.blocks using gist(iprange); $$; </code></pre><p>You can see the full list of options in the <a href="pgloader.1.html">pgloader reference manual</a>, with a complete description of the options you see here. </p><p>Note that while the <em>Geolite</em> data is using a pair of integers (<em>start</em>, <em>end</em>) to represent <em>ipv4</em> data, we use the very poweful <a href="https://github.com/RhodiumToad/ip4r">ip4r</a> PostgreSQL Extension instead. </p><p>The transformation from a pair of integers into an IP is done dynamically by the pgloader process. </p><p>Also, the location is given as a pair of <em>float</em> columns for the <em>longitude</em> and the <em>latiude</em> where PostgreSQL offers the <a href="http://www.postgresql.org/docs/9.3/interactive/functions-geometry.html">point</a> datatype, so the pgloader command here will actually transform the data on the fly to use the appropriate data type and its input representation. </p><h2>Loading the data</h2><p>Here's how to start loading the data. Note that the ouput here has been edited so as to facilitate its browsing online. </p><pre><code>$ pgloader archive.load  
+     $$ create index blocks_ip4r_idx on geolite.blocks using gist(iprange); $$; </code></pre><p>You can see the full list of options in the <a href="pgloader.1.html">pgloader reference manual</a>, with a complete description of the options you see here. </p><p>Note that while the <em>Geolite</em> data is using a pair of integers (<em>start</em>, <em>end</em>) to represent <em>ipv4</em> data, we use the very poweful <a href="https://github.com/RhodiumToad/ip4r">ip4r</a> PostgreSQL Extension instead. </p><p>The transformation from a pair of integers into an IP is done dynamically by the pgloader process. </p><p>Also, the location is given as a pair of <em>float</em> columns for the <em>longitude</em> and the <em>latitude</em> where PostgreSQL offers the <a href="http://www.postgresql.org/docs/9.3/interactive/functions-geometry.html">point</a> datatype, so the pgloader command here will actually transform the data on the fly to use the appropriate data type and its input representation. </p><h2>Loading the data</h2><p>Here's how to start loading the data. Note that the ouput here has been edited so as to facilitate its browsing online. </p><pre><code>$ pgloader archive.load  
 ... LOG Starting pgloader, log system is ready.  
 ... LOG Parsing commands from file "/Users/dim/dev/pgloader/test/archive.load"  
 ... LOG Fetching 'http://geolite.maxmind.com/download/geoip/database/GeoLiteCity_CSV/GeoLiteCity-latest.zip'  

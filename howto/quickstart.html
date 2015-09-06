@@ -54,6 +54,7 @@
                 </li>
                 <li><a href="../download.html">Download</a></li>
                 <li><a href="../sponsors.html">Sponsors</a></li>
+                <li><a href="../pgloader-moral-license.html">License</a></li>
               </ul>
             </div>
           </div>
@@ -86,7 +87,7 @@
          --with truncate                              \  
          --with "fields terminated by ','"            \  
          ./test/data/matching-1.csv                   \  
-         postgres:///pgloader?tablename=matching </code></pre><p>In that example the whole loading is driven from the command line, bypassing the need for writing a command in the pgloader command syntax entirely. As there's no command though, the extra inforamtion needed must be provided on the command line using the <code>--type</code> and <code>--field</code> and <code>--with</code> switches. </p><p>For documentation about the available syntaxes for the <code>--field</code> and <code>--with</code> switches, please refer to the CSV section later in the man page. </p><p>Note also that the PostgreSQL URI includes the target <em>tablename</em>. </p><h2>Reading from STDIN</h2><p>File based pgloader sources can be loaded from the standard input, as in the following example: </p><pre><code>pgloader --type csv                                         \  
+         postgres:///pgloader?tablename=matching </code></pre><p>In that example the whole loading is driven from the command line, bypassing the need for writing a command in the pgloader command syntax entirely. As there's no command though, the extra information needed must be provided on the command line using the <code>--type</code> and <code>--field</code> and <code>--with</code> switches. </p><p>For documentation about the available syntaxes for the <code>--field</code> and <code>--with</code> switches, please refer to the CSV section later in the man page. </p><p>Note also that the PostgreSQL URI includes the target <em>tablename</em>. </p><h2>Reading from STDIN</h2><p>File based pgloader sources can be loaded from the standard input, as in the following example: </p><pre><code>pgloader --type csv                                         \  
          --field "usps,geoid,aland,awater,aland_sqmi,awater_sqmi,intptlat,intptlong" \  
          --with "skip header = 1"                          \  
          --with "fields terminated by '\t'"                \  
