@@ -107,8 +107,8 @@
              (setf (aref vector i) (mem-ref data :uchar i)))
            vector))
         (otherwise
-          (sb-ext:enable-debugger)
-          (break)
+          ;(sb-ext:enable-debugger)
+          ;(break)
           (error "not supported type ~A"
                  (foreign-enum-keyword '%syb-value-type type))))))
 
