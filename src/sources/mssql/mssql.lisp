@@ -207,6 +207,7 @@
         ;;
         (cl-postgres:database-error (e)
           (declare (ignore e))		; a log has already been printed
+          (break)
           (log-message :fatal "Failed to create the schema, see above.")
 
           (return-from copy-database)))

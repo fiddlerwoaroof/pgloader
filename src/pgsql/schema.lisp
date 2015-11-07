@@ -26,7 +26,7 @@
           (cond ((quoted-p identifier)
                  :none)
 
-                ((not (cl-ppcre:scan "^[A-Za-z_][A-Za-z0-9_$]*$" identifier))
+                ((not (cl-ppcre:scan "^[A-Za-z_][A-Za-z0-9_$.]*$" identifier))
                  :quote)
 
                 ((member lowercase-identifier *pgsql-reserved-keywords*
@@ -45,6 +45,9 @@
       (:quote    (format nil "\"~a\""
                          (cl-ppcre:regex-replace-all "\"" identifier "\"\"")))
       (:none     identifier))))
+(trace apply-identifier-case :condition (progn
+                                          (or (equal (sb-debug:arg 0) "dbo.ext_log_entries")
+                                              (equal (sb-debug:arg 0) "\"dbo.ext_log_entries\""))))
 
 ;;;
 ;;; Some parts of the logic here needs to be specialized depending on the

@@ -88,6 +88,10 @@
         (:syb-int4 (unsigned-to-signed (mem-ref data :unsigned-int) 4))
         (:syb-int8 (mem-ref data :int8))
         (:syb-flt8 (mem-ref data :double))
+        (:syb-datetime4
+          (with-foreign-pointer (%buf +numeric-buf-sz+)
+            (foreign-string-to-lisp %buf
+                                    :count (%dbconvert %dbproc type data -1 :syb-char %buf +numeric-buf-sz+))))
         (:syb-datetime
          (with-foreign-pointer (%buf +numeric-buf-sz+)
            (foreign-string-to-lisp %buf
@@ -102,8 +106,11 @@
            (dotimes (i len)
              (setf (aref vector i) (mem-ref data :uchar i)))
            vector))
-        (otherwise (error "not supported type ~A"
-                          (foreign-enum-keyword '%syb-value-type type))))))
+        (otherwise
+          (sb-ext:enable-debugger)
+          (break)
+          (error "not supported type ~A"
+                 (foreign-enum-keyword '%syb-value-type type))))))
 
 ;; (defconstant +dbbuffer+ 14)
 

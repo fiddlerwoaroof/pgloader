@@ -6,6 +6,7 @@
     :author "Dimitri Fontaine <dimitri@2ndQuadrant.fr>"
     :license "The PostgreSQL Licence"
     :depends-on (#:uiop			; host system integration
+       #:swank
 		 #:cl-log		; logging
 		 #:postmodern		; PostgreSQL protocol implementation
 		 #:cl-postgres		; low level bits for COPY streaming

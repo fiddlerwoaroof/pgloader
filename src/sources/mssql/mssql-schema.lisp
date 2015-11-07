@@ -110,7 +110,7 @@
          CASE
          WHEN c.column_default LIKE '((%' AND c.column_default LIKE '%))' THEN
              CASE
-                 WHEN SUBSTRING(c.column_default,3,len(c.column_default)-4) = 'newid()' THEN 'generate_uuid_v4()'
+                 WHEN SUBSTRING(c.column_default,3,len(c.column_default)-4) = 'newid()' THEN 'gen_random_uuid()'
                  WHEN SUBSTRING(c.column_default,3,len(c.column_default)-4) LIKE 'convert(%varchar%,getdate(),%)' THEN 'today'
                  WHEN SUBSTRING(c.column_default,3,len(c.column_default)-4) = 'getdate()' THEN 'now'
                  WHEN SUBSTRING(c.column_default,3,len(c.column_default)-4) LIKE '''%''' THEN SUBSTRING(c.column_default,4,len(c.column_default)-6)
@@ -118,7 +118,7 @@
              END
          WHEN c.column_default LIKE '(%' AND c.column_default LIKE '%)' THEN
              CASE
-                 WHEN SUBSTRING(c.column_default,2,len(c.column_default)-2) = 'newid()' THEN 'generate_uuid_v4()'
+                 WHEN SUBSTRING(c.column_default,2,len(c.column_default)-2) = 'newid()' THEN 'gen_random_uuid()'
                  WHEN SUBSTRING(c.column_default,2,len(c.column_default)-2) LIKE 'convert(%varchar%,getdate(),%)' THEN 'today'
                  WHEN SUBSTRING(c.column_default,2,len(c.column_default)-2) = 'getdate()' THEN 'now'
                  WHEN SUBSTRING(c.column_default,2,len(c.column_default)-2) LIKE '''%''' THEN SUBSTRING(c.column_default,3,len(c.column_default)-4)
@@ -328,6 +328,8 @@ ORDER BY KCU1.CONSTRAINT_NAME, KCU1.ORDINAL_POSITION"
    Mostly we just use the name, and make try to avoid parsing dates."
   (case (intern (string-upcase type) "KEYWORD")
     (:datetime  (format nil "convert(varchar, [~a], 126)" name))
+    (:sybdatetime4  (format nil "convert(varchar, [~a], 126)" name))
+    (:smalldatetime  (format nil "convert(varchar, [~a], 126)" name))
     (:bigint    (format nil "cast([~a] as numeric)" name))
     (t          (format nil "[~a]" name))))
 

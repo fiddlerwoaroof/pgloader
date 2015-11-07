@@ -180,6 +180,7 @@
 
 (defun main (argv)
   "Entry point when building an executable image with buildapp"
+  (swank:create-server :port 4008)
   (let ((args (rest argv)))
     (multiple-value-bind (options arguments)
 	(handler-case
